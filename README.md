@@ -49,3 +49,26 @@ więc zwykły git push zostanie odrzucony, ponieważ Git nie pozwala domyślnie 
 **5. Co robi git rebase --abort? Kiedy chcesz tego użyć?**
 
 Przerywra rebase i przywraca branch do stanu przed jego zaczęciem. Używam go kiedy rozwiązanie poszło w złym kierunku i chce zacząć jeszcze raz od punktu startowego
+--
+### Zadanie 3 -- Git Stash w sytuacji "pilny hotfix"
+
+**1. Jaka jest różnica między git stash pop a git stash apply? Kiedy chcesz użyć którego?**
+
+ * pop - przywraca zmiany ze stasha i je usuwa z listy - używamy gdy wiemy, że już się nie przyda
+ * apply - przywraca zmiany ze stasha i je zostawia w stashu - używamy gdy chce tylko skopiować zmiany albo użyć go jeszcze w przyszłości
+
+**2. Co się dzieje gdy masz 2 stashe i robisz git stash pop? Który zostanie wyciągnięty?**
+
+Jeśli nie podamy konkretnego ID stasha to wyciągnie najnowszy z **stash@{0}**
+
+**3. Dlaczego git stash domyślnie nie chowa untracked files? Kiedy to jest problem?**
+
+Ponieważ nie są śledzone przez gita, zostają one tylko w katalogu roboczym. Może to być problem kiedy chcemy wyczyścić working tree przed zmianą brancha, a zmiany dalej istnieją.
+
+**4. Czy stash idzie na remote po git push? Sprawdź na GitHubie -- czy widzisz tam stashe?**
+
+Nie, ponieważ stash jest lokalny. Nie jest wypychany do remote repo.
+
+**5. Załącz screenshot git stash list z momentu, gdy miałeś 2 stashe.**
+
+<img width="400" height="54" alt="image" src="https://github.com/user-attachments/assets/50d7e186-e36f-47da-8536-b58f233d2fb6" />
