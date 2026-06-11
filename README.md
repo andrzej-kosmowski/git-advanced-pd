@@ -22,8 +22,10 @@ Lokalnie lepiej rozwiązywać konflikty, gdy zmian jest więcej, potrzeba jest u
   2. Można wprowadzać zmiany używając przycisków IntelliJ'a zamiast ręcznie usuwać markery, co może powodować dalsze błędy.
 
 **5. Załącz screenshot 3-panelowego narzędzia IntelliJ podczas rozwiązywania konfliktu.**
+
 <img width="2012" height="854" alt="image" src="https://github.com/user-attachments/assets/0bb7a57c-5ade-4067-b7fe-b7059e314622" />
---
+
+---
 ### Zadanie 2 -- Konflikt na rebase zamiast merge
 
 **1. Jak wygląda git log --graph --oneline --all po rebase? Załącz screenshot.**
@@ -49,7 +51,9 @@ więc zwykły git push zostanie odrzucony, ponieważ Git nie pozwala domyślnie 
 **5. Co robi git rebase --abort? Kiedy chcesz tego użyć?**
 
 Przerywra rebase i przywraca branch do stanu przed jego zaczęciem. Używam go kiedy rozwiązanie poszło w złym kierunku i chce zacząć jeszcze raz od punktu startowego
---
+
+---
+
 ### Zadanie 3 -- Git Stash w sytuacji "pilny hotfix"
 
 **1. Jaka jest różnica między git stash pop a git stash apply? Kiedy chcesz użyć którego?**
@@ -72,3 +76,51 @@ Nie, ponieważ stash jest lokalny. Nie jest wypychany do remote repo.
 **5. Załącz screenshot git stash list z momentu, gdy miałeś 2 stashe.**
 
 <img width="400" height="54" alt="image" src="https://github.com/user-attachments/assets/50d7e186-e36f-47da-8536-b58f233d2fb6" />
+
+---
+
+### Zadanie 4 -- Cherry-pick: przeniesienie commita między gałęziami
+
+**1. Jaki był hash oryginalnego commita na feature/A? Jaki na main po cherry-pick? Załącz oba git log --oneline.**
+
+ * main po cherry-pick: 943df06
+ * oryginalny z feature/A: 9887cc8
+
+**2. Dlaczego hash jest różny, jeśli treść (diff) jest identyczna? (Wskazówka: parent commit, timestamp.)**
+
+Cherry-pick tworzy nowy commit na aktualnej gałęzi, dlatego otrzymuje nowy hash. Git traktuje go jako nowy obiekt, mimo że zawartość zmian jest identyczna.
+
+**3. Co zawiera app.txt na main po cherry-pick (która sekcja jest wypełniona, a które mają nadal [TODO ...])? Czego tam nie ma?**
+
+Po wykonaniu cherry-pick na gałęzi main wypełniona jest tylko sekcja B:
+
+```
+Linia 1: początek
+
+=== Sekcja A ===
+[TODO A]
+
+=== Sekcja B ===
+Sekcja B: ważna zmiana w feature/A (commit 2)
+
+=== Sekcja C ===
+[TODO C]
+```
+
+Na gałęzi main nie ma zmian z:
+
+* commita 1 (Sekcja A)
+* commita 3 (Sekcja C)
+
+**4. Co się dzieje, gdy cherry-pick wywoła konflikt? Jak go rozwiązać (analogia do merge/rebase)? Eksperyment: spróbuj cherry-pickować trzeci commit (zmiana sekcji C) -- czy też przejdzie bezkonfliktowo? Dlaczego?**
+
+Procedura rozwiązania jest bardzo podobna do merge lub rebase:
+1. Otworzyc edytor
+2. usunąc markery
+3. Poprawić wersje
+4. dodac pliki - git add
+5. cherry-pick --continue
+
+**5. Kiedy używać cherry-pick zamiast merge?**
+
+Wtedy kiedy chcemy przenieść tylko konkretny commit bez łączenia całej gałęzi
