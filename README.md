@@ -124,3 +124,37 @@ Procedura rozwiązania jest bardzo podobna do merge lub rebase:
 **5. Kiedy używać cherry-pick zamiast merge?**
 
 Wtedy kiedy chcemy przenieść tylko konkretny commit bez łączenia całej gałęzi
+
+---
+
+### Zadanie 5 -- In teractive Rebase: porządkowanie historii przed PR
+
+**1. Jaka jest różnica między squash a fixup? (Wskazówka: co dzieje się z wiadomością commit?)**
+
+* squash - łączy commit z poprzednim oraz pozwala edytować wiadomość commita
+* fixup - też łączy ale odrzuca edytowanie wiadomości commita
+
+**2. Dlaczego po git rebase -i musisz użyć git push --force-with-lease? Co by się stało gdybyś użył zwykłego git push?**
+
+Ponieważ tworzy nową historię brancha, mogą być różne wiadomości commitów etc. 
+Git push zostanie odrzucony, ponieważ historia lokalna różni się od tej na gh
+
+**3. Co zrobi się złego, jeśli zrobisz rebase -i na main współdzielonym z zespołem?**
+
+Można przepisać historię całego brancha przez co inni będą mieli różne hashe lokalnie i remota. Git push może przestać działać, mogą powstać duplikaty. Repo będzie ciężkie do uporządkowania
+
+**4. Załącz screenshot git log --oneline przed rebase i po rebase.**
+
+ * Przed:
+
+   <img width="942" height="136" alt="image" src="https://github.com/user-attachments/assets/29fd55e6-9ef1-4386-ab24-fc0bf4a4463c" />
+   
+ * Po:
+
+   <img width="449" height="90" alt="image" src="https://github.com/user-attachments/assets/5dcae519-d147-43d5-929e-ab50464dce42" />
+
+**5. Co robi drop -- usuwa zmiany z plików czy tylko z historii? Sprawdź zawartość NOTES.txt po rebase.**
+
+drop usuwa zmiany oraz historię, w tym przypadku po rebase plik NOTES.txt nie istnieje
+
+
