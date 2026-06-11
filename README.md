@@ -193,4 +193,42 @@ c) Tak, jeżeli commit tej gałęzi nadal znajduje się w reflogu i nie został 
 
   <img width="547" height="137" alt="image" src="https://github.com/user-attachments/assets/dac29aa6-6c35-477f-86fb-eacd7a129238" />
 
+---
 
+### Zadanie 7 -- Bisect: binarne polowanie na buga
+
+**1. Ile kroków potrzebował bisect, żeby znaleźć buga? Jak ta liczba ma się do log₂(8) = 3?**
+
+Około 3 więc, zgadza się z teorią działania wyszukiwania binarnego.
+
+**2. Hash i wiadomość złego commita -- skopiuj z konsoli.**
+
+```
+5da57be6ea60c457b3f64de5cf652668e20411c9 is the first bad commit
+commit 5da57be6ea60c457b3f64de5cf652668e20411c9
+Author: Andrzej <bazylek11@gmail.com>
+Date:   Thu Jun 11 15:00:06 2026 +0200
+
+    feat: multiply method
+
+ Calc.java | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+```
+
+**3. Kiedy bisect jest lepszy niż git log + git diff?**
+
+git log oraz git diff są przydatne, gdy znamy przybliżone miejsce problemu lub chcemy ręcznie przeanalizować historię zmian.
+
+git bisect jest lepszy, gdy:
+
+* repozytorium zawiera dużo commitów
+* nie wiadomo, który commit wprowadził błąd
+* można łatwo określić, czy dany commit jest „good” czy „bad”
+* chcemy szybko znaleźć regresję
+
+**Co robi git bisect run <skrypt>? Jakie kody wyjścia ma rozumieć skrypt?**
+
+
+
+**Co zrobić, jeśli któryś commit się nie kompiluje podczas bisect i nie da się ocenić? (Wskazówka: git bisect skip + exit 125 w bisect run.)**
