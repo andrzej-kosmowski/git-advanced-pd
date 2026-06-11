@@ -157,4 +157,40 @@ Można przepisać historię całego brancha przez co inni będą mieli różne h
 
 drop usuwa zmiany oraz historię, w tym przypadku po rebase plik NOTES.txt nie istnieje
 
+---
+
+### Zadanie 6 -- Reflog: odzyskanie po reset --hard
+
+**1. Jak długo żyją wpisy reflog? (Wskazówka: zobacz git config gc.reflogExpire.)**
+
+Domyślnie wpisy reflog ok 90 dni, a wpisy dot. commitów nieosiągalnych ok 30 dni.
+
+**2. Czy reflog idzie na remote po git push? Sprawdź: zaloguj się na GitHubie i sprawdź, czy widzisz tam reflog.**
+
+Nie. Reflog jest lokalny i nie idzie na GH po pushu
+
+**3. Jak rozpoznać w git reflog, który HEAD@{N} to "przed pomyłkowym resetem"?**
+
+Po błędnym resecie w reflogu pojawia się wpis podobny do: HEAD@{0}: reset: moving to HEAD~2
+
+Stan sprzed resetu jest zwykle jeden wpis niżej, np.: HEAD@{1}: commit: Commit C
+
+**4. Czy reflog uratuje Cię, gdy: (a) przypadkowo rm -rf na całym katalogu repo? (b) przypadkowo git reset --hard ale jeszcze przed pushem? (c) usunąłeś gałąź lokalnie, ale była tylko lokalnie?**
+
+a) Nie, jeśli usunięty został cały katalog repozytorium razem z folderem .git.
+
+b) Tak. To jest typowy przypadek użycia reflog.
+
+c) Tak, jeżeli commit tej gałęzi nadal znajduje się w reflogu i nie został jeszcze usunięty przez garbage collection.
+
+**5. Załącz screenshot git reflog po reset i po recovery.**
+
+ * Po reset
+
+   <img width="536" height="83" alt="image" src="https://github.com/user-attachments/assets/2145a52f-ef77-4330-8874-39bcaa7ae57e" />
+
+* Po recovery
+
+  <img width="547" height="137" alt="image" src="https://github.com/user-attachments/assets/dac29aa6-6c35-477f-86fb-eacd7a129238" />
+
 
