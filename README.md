@@ -23,3 +23,29 @@ Lokalnie lepiej rozwiązywać konflikty, gdy zmian jest więcej, potrzeba jest u
 
 **5. Załącz screenshot 3-panelowego narzędzia IntelliJ podczas rozwiązywania konfliktu.**
 <img width="2012" height="854" alt="image" src="https://github.com/user-attachments/assets/0bb7a57c-5ade-4067-b7fe-b7059e314622" />
+--
+### Zadanie 2 -- Konflikt na rebase zamiast merge
+
+**1. Jak wygląda git log --graph --oneline --all po rebase? Załącz screenshot.**
+<img width="824" height="97" alt="image" src="https://github.com/user-attachments/assets/dd0c227f-dd53-49f4-b4a4-d39ed383ac64" />
+
+**2. Jaka jest różnica w historii między rozwiązaniem przez merge (zad. 1) a rebase (zad. 2)?**
+
+Przy merge historia pokazuje osobne gałęzie oraz merge commit, który łączy zmiany
+
+Przy rebase git przenosi commit jakby był świeży, przez co historia jest prosta i nie ma merge commita.
+
+**3. Dlaczego po rebase trzeba użyć git push --force-with-lease? Co by się stało gdybyś użył zwykłego git push?**
+
+Po rebase zmienia się historia gałęzi, ponieważ Git tworzy nowy commit z nowym hashem. Remote nadal ma starą wersję commita,
+więc zwykły git push zostanie odrzucony, ponieważ Git nie pozwala domyślnie nadpisać historii na zdalnym repozytorium.
+
+**4. Czym różni się --force-with-lease od --force? Kiedy używać którego?**
+
+--force nie sprawdza czy ktoś w międzyczasie nie dodał swoich commitów, nadpisą gałąź mimo wszystko // Niebezpieczne!
+
+--force-with-lease - sprawrdza historię i nadpiszę gałąź tylko jeśli historia jest taka sama 
+
+**5. Co robi git rebase --abort? Kiedy chcesz tego użyć?**
+
+Przerywra rebase i przywraca branch do stanu przed jego zaczęciem. Używam go kiedy rozwiązanie poszło w złym kierunku i chce zacząć jeszcze raz od punktu startowego
