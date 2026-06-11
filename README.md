@@ -1,1 +1,1 @@
-"# Praca domowa: Git zaawansowany" 
+# Praca domowa: Git zaawansowany
