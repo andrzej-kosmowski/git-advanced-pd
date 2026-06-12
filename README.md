@@ -283,3 +283,26 @@ Można je odzyskać przez reflog
 
 <img width="379" height="86" alt="image" src="https://github.com/user-attachments/assets/549fcb07-d651-43c6-8422-4250fd37a86b" />
 
+---
+
+### Zadanie 9 -- Feature branch + PR z konfliktem (GitHub flow)
+
+**1. Po co w ogóle pracować na osobnej gałęzi feature/... zamiast commitować bezpośrednio na main?**
+
+Osobna gałąź pozwala pracować nad zmianą bez psucia stabilnej wersji projektu na main.
+
+**2. Kiedy używasz git fetch origin + git merge origin/main, a kiedy git fetch origin + git rebase origin/main? Jak to wpływa na historię?**
+
+**3. Jaka jest różnica między Squash and merge, Create a merge commit i Rebase and merge w UI GitHuba?**
+
+**4. Dlaczego po lokalnym git rebase origin/main musisz pushować --force-with-lease (zamiast zwykłego --force)?**
+
+Po rebase Git tworzy nowe wersje commitów z nowymi hashami. Lokalna historia gałęzi feature/dodaj-todo różni się wtedy od tej, która jest już na GitHubie.
+
+**5. Wymień 3 dobre praktyki przy zgłaszaniu PR (commit messages, opis, rozmiar PR, code review).**
+
+ * Pisać czytelne wiadomości commitów i tytuł PR-a, np. feat: oznacz zadanie 1 jako zrobione.
+ * Dodać opis PR-a: co zostało zmienione, dlaczego i jak to sprawdzić.
+ * Robić małe PR-y, które łatwo przejrzeć w code review.
+
+---
