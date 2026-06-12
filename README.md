@@ -372,3 +372,42 @@ git blame -w UserService.java ignoruje zmiany białych znaków, więc powinien p
 **5. Czy git blame modyfikuje historię lub repo? Jakie ma efekty uboczne?**
 
 Nie. git blame niczego nie zmienia w repozytorium.
+
+---
+
+### 12. Git Diff zaawansowane
+
+**1. Wykonałeś git add file.txt, ale nie zrobiłeś commita. Jakie polecenie pokaże Ci dokładnie zawartość, która pójdzie w następny commit?**
+
+git diff --staged
+
+**2. Czym różni się git diff main..feature od git diff main...feature (dwie kropki vs trzy)? Kiedy używać której formy?**
+
+git diff main..feature - Pokazuje różnicę między aktualnym stanem gałęzi main a aktualnym stanem gałęzi feature.
+git diff main...feature - Pokazuje zmiany wprowadzone na gałęzi feature od wspólnego przodka z main.
+
+**3. Jak wyświetlić statystyki (+/- per plik) bez pełnej zawartości diffa?**
+
+git diff --stat
+
+**4. Jakim poleceniem porównasz tylko jeden plik (app.py) między dwiema gałęziami?**
+
+git diff main..feature/xyz -- app.py
+
+**5. Jak wyświetlić diff ostatniego commita (zmiany wprowadzone przez HEAD)?**
+
+git diff HEAD~1..HEAD
+
+--- 
+
+### 13. Force push z --force-with-lease
+
+**1. Czym dokładnie różni się --force od --force-with-lease? Który chroni przed nadpisaniem cudzej pracy?**
+
+**2. Po jakich operacjach (wymień min. 3) jesteś zmuszony użyć force pusha, a kiedy wystarczy zwykły push?**
+
+**3. Czy --force-with-lease zadziała, jeżeli przed pushem zrobiłeś git fetch origin, ale nie zauważyłeś nowych commitów? Dlaczego?**
+
+**4. Jak w IntelliJ uruchomić Force Push? Czy używa --force czy --force-with-lease?**
+
+**5. Wymień 2 gałęzie, na których w pracy zespołowej nigdy nie powinno się robić force pusha (i powiedz, jak je chronić w UI GitHuba).**
