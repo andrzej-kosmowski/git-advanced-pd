@@ -253,3 +253,33 @@ Przykład:
 ```
 javac Calc.java 2>/dev/null || exit 125
 ```
+
+---
+
+### Zadanie 8 -- Reset (3 tryby) vs Revert
+
+**1. Wypełnij tabelę:**
+
+| Tryb	| git status po reset |	Zawartość pliku w working dir |	Czy zmiany w staging? |
+| --- | --- | --- | --- |
+| --soft	| Changes to be committed	| Wersja C	| Tak |
+| --mixed	| Changes not staged for commit	| Wersja C	| Nie |
+| --hard	| nothing to commit, working tree clean	| Wersja B	| Nie |
+
+**2. Dlaczego git revert jest bezpieczny dla zespołu, a git reset --hard na pushowanym branchu nie?**
+
+git revert nie usuwa historii. Tworzy nowy commit, który odwraca zmiany z wcześniejszego commita.
+
+**3. Po git reset --hard -- czy stracone commity są usunięte z dysku? Jak je odzyskać?**
+
+Nie od razu. Commity zwykle nadal istnieją lokalnie przez jakiś czas, tylko branch już na nie nie wskazuje.
+Można je odzyskać przez reflog
+
+**4. Kiedy chcesz zrobić --soft zamiast --mixed?**
+
+--soft jest przydatny, gdy chcę cofnąć commit, ale zostawić jego zmiany od razu przygotowane do kolejnego commita.
+
+**5. Załącz screenshot git log --oneline po git revert HEAD -- czy oryginalny Commit C jest jeszcze w historii?**
+
+<img width="379" height="86" alt="image" src="https://github.com/user-attachments/assets/549fcb07-d651-43c6-8422-4250fd37a86b" />
+
