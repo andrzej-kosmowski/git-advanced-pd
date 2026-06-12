@@ -306,3 +306,43 @@ Po rebase Git tworzy nowe wersje commitów z nowymi hashami. Lokalna historia ga
  * Robić małe PR-y, które łatwo przejrzeć w code review.
 
 ---
+
+### Zadanie 10 -- Śledztwo: kombinacja technik (samodzielne)
+
+1. Problem (a) -- "stracone" commity:
+
+ * Jakie narzędzie użyłeś?
+   - git reflog
+ * Co dokładnie zaobserwowałeś (jaki output)?
+   - git log --oneline pokazywał tylko Commit 1, Commit 2 oraz późniejsze commity, a Commit 3 i Commit 4 zniknęły z aktualnej historii
+ * Jak rozwiązałeś (pełna komenda CLI lub opis kliknięć w IntelliJ)?
+   - git reset --hard HEAD@{12}
+
+2. Problem (b) -- bug w jednym z 8 commitów:
+
+ * Jakie narzędzie użyłeś?
+   - git bisect
+ * Ile kroków potrzebowałeś?
+   - 3 
+ * Hash złego commita.
+   - a789fa7 feat: dodaj absoluteValue (commit B5)
+ * Jak rozwiązałeś?
+   - git bisect start
+   - git bisect bad
+   - git bisect good 
+
+3. Problem (c) -- niedokończone zmiany + merge gałęzi kolegi:
+
+ * Jakie narzędzie użyłeś?
+   - git stash -u
+ * Co stało się z wip.txt po Twoich akcjach?
+    - git stash -u / Dzięki temu wip.txt został tymczasowo schowany razem z untracked files.
+ * Jak wyglądała kolejność komend?
+    - git status
+    - git stash push -u -m "WIP: moja niedokończona praca"
+    - git merge colleague/finished-feature
+    - git stash pop
+    - git add wip.txt
+    - git commit -m "feat: add saved WIP note"
+    - git push
+
