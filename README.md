@@ -346,3 +346,29 @@ Po rebase Git tworzy nowe wersje commitów z nowymi hashami. Lokalna historia ga
     - git commit -m "feat: add saved WIP note"
     - git push
 
+---
+
+### 11. Git Blame -- kto zmienił tę linię
+
+**1. Która komenda pokaże autorów tylko linii 4-7 pliku UserService.java?**
+
+git blame -L 4,7 UserService.java
+
+**2. Załóż, że ostatni commit zmienił tylko biały znak (tab → spacja) w danej linii. Czy git blame przypisze tę linię do tego commita? A git blame -w?**
+
+git blame -w UserService.java ignoruje zmiany białych znaków, więc powinien pokazać wcześniejszy commit, który faktycznie zmienił treść linii.
+
+**3. Czym różni się odpowiedź git blame od odpowiedzi git bisect na pytanie "kto wprowadził buga"?**
+
+ * git blame pokazuje, kto ostatnio zmienił konkretną linię pliku.
+ * git bisect szuka pierwszego commita, od którego program zaczął działać źle.
+
+**4. W IntelliJ -- jak włączyć widok Annotate with Git Blame i jak go wyłączyć?**
+
+ 1. Otworzyć plik
+ 2. Kliknąć prawym przyciskiem na marginesie z numerami linii
+ 3. Wybrać Annotate with Git Blame
+
+**5. Czy git blame modyfikuje historię lub repo? Jakie ma efekty uboczne?**
+
+Nie. git blame niczego nie zmienia w repozytorium.
