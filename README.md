@@ -227,8 +227,29 @@ git bisect jest lepszy, gdy:
 * można łatwo określić, czy dany commit jest „good” czy „bad”
 * chcemy szybko znaleźć regresję
 
-**Co robi git bisect run <skrypt>? Jakie kody wyjścia ma rozumieć skrypt?**
+**4. Co robi git bisect run <skrypt>? Jakie kody wyjścia ma rozumieć skrypt?**
 
+automatyzuje proces oznaczania commitów jako dobrych lub złych. Git uruchamia skrypt dla kolejnych commitów i na podstawie kodu wyjścia decyduje, czy commit jest poprawny.
 
+```
+0 -> good
+1-127 (poza 125) -> bad
+125 -> skip
+```
 
 **Co zrobić, jeśli któryś commit się nie kompiluje podczas bisect i nie da się ocenić? (Wskazówka: git bisect skip + exit 125 w bisect run.)**
+
+należy go pominąć.
+
+Ręcznie:
+```
+git bisect skip
+```
+Automatycznie w git bisect run:
+```
+exit 125
+```
+Przykład:
+```
+javac Calc.java 2>/dev/null || exit 125
+```
