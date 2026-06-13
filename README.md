@@ -404,10 +404,91 @@ git diff HEAD~1..HEAD
 
 **1. Czym dokładnie różni się --force od --force-with-lease? Który chroni przed nadpisaniem cudzej pracy?**
 
+git push --force nadpisuje zdalną gałąź lokalną wersją bez dodatkowego sprawdzania. Jeśli ktoś inny wypchnął swoje commity na tę samą gałąź, zwykły --force może je usunąć z historii remote.
+
+git push --force-with-lease jest bezpieczniejsze. Przed nadpisaniem sprawdza, czy zdalna gałąź nadal jest w takim stanie, jaki Git zna lokalnie z ostatniego fetch / pull.
+
 **2. Po jakich operacjach (wymień min. 3) jesteś zmuszony użyć force pusha, a kiedy wystarczy zwykły push?**
+
+ * force push:
+   - git commit --amend
+   - git rebase -i
+   - git reset --hard <starszy_commit>
+   - git rebase origin/main
+  
+ * zwykły push:
+   - git commit
+   - git merge
+   - git revert
 
 **3. Czy --force-with-lease zadziała, jeżeli przed pushem zrobiłeś git fetch origin, ale nie zauważyłeś nowych commitów? Dlaczego?**
 
+--force-with-lease porównuje remote z lokalnym zapamiętanym stanem origin/main. Jeśli zrobisz git fetch origin, to lokalny origin/main zostanie zaktualizowany do najnowszego stanu.
+
 **4. Jak w IntelliJ uruchomić Force Push? Czy używa --force czy --force-with-lease?**
 
+W IntelliJ:
+
+ 1. Otwieram okno Push przez Git → Push... albo Ctrl+Shift+K
+ 2. Jeśli zwykły push nie przechodzi, klikam strzałkę obok przycisku Push
+ 3. Wybieram Force Push
+
+IntelliJ domyślnie używa bezpieczniejszego wariantu, czyli odpowiednika:
+
+git push --force-with-lease
+
 **5. Wymień 2 gałęzie, na których w pracy zespołowej nigdy nie powinno się robić force pusha (i powiedz, jak je chronić w UI GitHuba).**
+
+ * main
+ * develop
+
+Można chronić przez ustawienie branch protection rules. 
+
+--- 
+
+### 14. Git Alias -- skróty dla codziennych komend
+
+**1. Jaka jest różnica między --global a --local przy definiowaniu aliasu? Gdzie zapisywany jest każdy z nich?**
+
+ * --global zapisuje alias w globalnej konfiguracji użytkownika, czyli zwykle w pliku:
+```
+~/.gitconfig
+```
+
+ * --local zapisuje alias tylko w bieżącym repozytorium, w pliku:
+```
+.git/config
+```
+
+**2. Co oznacza prefiks ! w aliasie (np. alias.up = !git fetch ...)? Czego on nie pozwala zrobić bez tego prefiksu?**
+
+Prefiks ! oznacza, że alias uruchamia zwykłe polecenie shell, a nie tylko podkomendę Gita. Bez ! Git traktowałby alias jako podkomendę Gita. Z ! można uruchamiać bardziej złożone polecenia systemowe, łączyć komendy przez &&, używać du, echo itd.
+
+**3. Jak wyświetlić listę wszystkich zdefiniowanych aliasów?**
+
+git config --global --get-regexp '^alias\.'
+
+**4. Czy alias git ci zostanie automatycznie przesłany do współpracowników, gdy zrobisz git push? Dlaczego?**
+
+Nie. Aliasy są zapisane lokalnie w konfiguracji Gita, np. w ~/.gitconfig albo .git/config.
+
+**5. Zaproponuj 3 aliasy, które dla Ciebie osobiście miałyby największy sens w codziennej pracy. Uzasadnij wybór.**
+
+  1. git st
+   ```
+   git config --global alias.st "status"
+   ```
+Przydatny, bo git status wykonuje się bardzo często.
+
+  2. git lg
+   ```
+   git config --global alias.lg "log --oneline --graph --all --decorate"
+   ```
+Przydatny do szybkiego sprawdzenia historii, branchy i merge commitów.
+
+  3. git ci
+  ```
+git config --global alias.ci "commit"
+  ```
+
+Przydatny do szybszego commitowania zmian.
